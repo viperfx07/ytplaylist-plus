@@ -1,0 +1,26 @@
+{
+   "background_page": "background.html",
+   "content_scripts": [ {
+      "all_frames": true,
+      "js": [ "jquery-1.7.1.min.js", "content_script.js" ],
+      "matches": [ "http://*/*", "https://*/*" ]
+    } ],
+   "default_locale": "en",
+   "description": "YTPlaylist Extension",
+   "icons": {
+      "128": "icons/abp-128.png",
+      "16": "icons/abp-16.png",
+      "32": "icons/abp-32.png",
+      "48": "icons/abp-48.png"
+   },
+       "name": "YTPlaylist+",
+   "options_page": "options.html",
+   "page_action": {
+      "default icon": "icons/abp-16.png",
+      "default title": "YTPlaylist+",
+      "popup": "popup.html"
+   },
+   "permissions": [ "tabs", "http://*/*", "https://*/*", "contextMenus", "unlimitedStorage" ],
+   "update_url": "http://clients2.google.com/service/update2/crx",
+   "version": "0.1"
+}
