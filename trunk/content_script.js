@@ -28,6 +28,16 @@
   var ytplaylist_button_watch = '<button onclick=";return false;" title="Add to YTPlaylist" type="button" class="addto-button watch show-label yt-uix-tooltip-reverse yt-uix-button yt-uix-tooltip ytplaylist_addtolist" data-feature="watch" role="button" data-tooltip-text="Add to YTPlaylist"><img class="yt-uix-button-icon yt-uix-button-icon-addto" src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" alt="Add to YTPlaylist"><span class="yt-uix-button-content"><span class="addto-label">Add to YTPlaylist</span></span></button>';
  
 
+ function eventChecker()
+ {
+	$.each($('.ytplaylist_addtolist').data('events'), function(i, event){
+		$.each(event, function(i, handler){
+			console.log( handler.toString() );
+		});
+	});
+}
+ 
+
  
  //Add "Add to YTPlaylist" button on Youtube recommended links on the right hand side
  $(".video-list-item-link").each(function(){
@@ -78,14 +88,55 @@ var inject = function() {
 	
 	if($(".video-list-item-link:last").next().attr('type') != 'button'){
 		$(".video-list-item-link:last").after(ytplaylist_button_thumb + '<input type="hidden" id="ytplaylist_video_id" value="' + temp1 + '"/>');
+		eventChecker();
 	}
 	
   } catch(e) {
     console.error("ERROR: " + e.toString());
   } finally {
     isActive = false;
+
   }
 };
-document.getElementById("watch-sidebar").addEventListener("DOMNodeInserted", inject, false);
-document.getElementById("feed-system-all").addEventListener("DOMNodeInserted", inject, false);
+if(document.getElementById("watch-sidebar"))
+	document.getElementById("watch-sidebar").addEventListener("DOMNodeInserted", inject, false);
 
+var isActive1 = false;
+var inject1 = function() {
+  if (isActive1) {
+    console.log('INFO: Injection already active');
+    return;
+  }
+  try {
+    isActive1 = true;
+    //inject your buttons here
+    
+	if($(".feed-page").next().attr('type') != 'button'){
+		$(".feed-page").each(function(){
+			$(".feed-item-visual",this).each(function(){
+				var temp = (($(".feed-item-visual-thumb a",this).attr("href")).split("&"))[0];
+				var temp1 = (temp.split("="))[1];
+				if($(this).next().attr('type') !='button'){
+					$(this).after(ytplaylist_button_watch + '<input type="hidden" id="ytplaylist_video_id" value="' + temp1 + '"/>');
+					eventChecker();
+				}
+			});
+		});
+	}
+	
+	
+  } catch(e) {
+    console.error("ERROR: " + e.toString());
+  } finally {
+    isActive1 = false;
+	
+  }
+};
+document.getElementById("feed-system-all").addEventListener("DOMNodeInserted", inject1, false);
+
+
+$(".ytplaylist_addtolist").click(function(){
+	localStorage.ytplaylist = (localStorage.ytplaylist) ?  (localStorage.ytplaylist +  "|||" + $(this).next().attr('value')) : ($(this).next().attr('value'));
+});
+
+ eventChecker();
