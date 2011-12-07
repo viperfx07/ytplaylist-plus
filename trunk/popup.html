@@ -4,31 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style type="text/css" media="screen">
 </style>
-<script type="text/javascript" src="./jquery-1.7.1.min.js"></script>
-<script>
-$.ajax({
-	type:"GET",
-	url:"http://gdata.youtube.com/feeds/api/videos/"+'48WseQ5F9AA'+"?alt=jsonc&v=2",
-	dataType:"jsonp",
-	success:function(d){
-	var e=d.data;d=e.title;var f=e.uploader,g=e.thumbnail.sqDefault;
-	var j=[];
-	j.title=d;
-	j.author=f;
-	j.thumbnail=g;
-	j.duration=e;
-	alert(g);
-	}
-})
-	
-</script>
-
 </head>
 <body id="main">
-<script src="http://ytplaylist.com/js/ytp_embed.js"></script>
-<script>
-var ymf_embed = new ymfEmbed({id:'ymf_embed',playlist:'KG1ey3QvC7Y',auto:false});
-ymf_embed.init();
-</script>
 </body>
 </html>
