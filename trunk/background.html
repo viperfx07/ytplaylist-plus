@@ -2,6 +2,57 @@
 <head>
 <meta http-equiv="Content-Script-Type" content="text/javascript, charset=UTF-8">
 <script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+<script  type="text/javascript">
+function addToList(v)
+{
+	if(localStorage["ytplaylist"] == undefined)
+		localStorage["ytplaylist"] = v;
+	else
+	{
+		//if not found the same link
+		if((localStorage["ytplaylist"]).search(v)<0){
+			localStorage["ytplaylist"] = (localStorage["ytplaylist"]) ? (localStorage["ytplaylist"] +=  "|||" + v) : v;
+			console.log(localStorage["ytplaylist"]);
+		}
+		else
+			return 0; //failed adding the video to list
+	}
+	
+	return 1;	//success adding the video to list
+}
+
+function removeFromList(v)
+{
+	return 1;	//success adding the video to list
+}
+
+function clearList()
+{
+	localStorage["ytplaylist"]="";
+	return 1;
+}
+
+
+chrome.extension.onRequest.addListener(
+  function(request, sender, sendResponse) {
+     if (request.reqType == "addToList"){
+		sendResponse(addToList(request.v));
+	}
+	else if(request.reqType == "removeFromList"){
+		sendResponse(removeFromList(request.v));
+	}
+	else if(request.reqType == "clearList"){
+		sendResponse(clearList());
+	}
+	else if(request.reqType == "getList"){
+		sendResponse(localStorage["ytplaylist"]);
+	}
+	
+    else
+      sendResponse({}); // snub them.
+});
+
+
 </script>
 </head>
 </html>
