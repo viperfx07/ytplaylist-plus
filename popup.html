@@ -3,8 +3,96 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style type="text/css" media="screen">
+body{ width:200px;}
+
+.navSubmenu:hover, .navSubmenu:focus, .navSubmenu:active {
+background: #6D84B4;
+border-bottom: solid 1px #3B5998;
+border-top: solid 1px #3B5998;
+color: white;
+}
+
+li {
+display: block;
+float: none;
+}
+
+.navSubmenu {
+border-bottom: solid 1px white;
+border-top: solid 1px white;
+color: #222;
+height: 18px;
+line-height: 18px;
+padding: 0 22px;
+}
+
+a {
+height: 31px;
+line-height: 29px;
+padding: 0;
+vertical-align: top;
+}
+
+a {
+color: #D8DFEA;
+}
+
+.navigation a{
+color: #3A579A;
+display: block;
+font-weight: normal;
+height: auto;
+padding: 4px 10px 5px;
+white-space: nowrap;
+}
+
+
+a {
+display: block;
+display: inline-block;
+font-weight: bold;
+height: 22px;
+padding: 8px 10px 0 10px;
+text-decoration: none;
+cursor: pointer;
+color: #3B5998;
+text-decoration: none;
+}
+
+ul{
+	list-style-type: none;
+}
+
+.navigation {
+display: block;
+background: white;
+border: 1px solid #333;
+border-bottom: 2px solid #2D4486;
+margin-right: 1px;
+margin-top: 1px;
+min-width: 200px;
+padding: 10px 0 5px;
+right: 0;
+}
+
+
+
 </style>
+<script type="text/javascript">
+function clearList(){
+	localStorage['ytplaylist']='';
+	alert("Playlist cleared");
+}
+</script>
 </head>
-<body id="main">
+<body>
+
+
+<ul class="navigation" role="navigation">
+	<li><a class="navSubmenu" href="#" onclick="chrome.tabs.create({'url':'http://www.ytplaylist.com'});">Go to YTPlaylist</a></li>
+	<li><a class="navSubmenu"href="#" onclick="clearList()">Clear List</a></li>
+</ul>
+
+
 </body>
 </html>

@@ -22,8 +22,8 @@
        "name": "YTPlaylist+",
    "options_page": "options.html",
    "browser_action": {
-      "default icon": "icons/ytp-16.png",
-      "default title": "YTPlaylist+",
+      "default_icon": "icons/ytp-16.png",
+      "default_title": "YTPlaylist+",
       "popup": "popup.html"
    },
    "permissions": [ "tabs", "http://*/*", "https://*/*", "contextMenus", "unlimitedStorage" ],
