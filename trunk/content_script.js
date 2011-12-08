@@ -24,7 +24,10 @@
  
 
 var ytplaylist_button_thumb = '<button type="button" class="yt-uix-button yt-uix-button-short ytplaylist_addtolist" onclick=";return false;" data-feature="thumbnail" role="button"><span class="yt-uix-button-content"><img class="yt-uix-button-icon yt-uix-button-icon-addto" src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" alt="Add to YTPlaylist"><span class="addto-label">Add to YTPlaylist</span> </span></button>';
+
 var ytplaylist_button_watch = '<button onclick=";return false;" title="Add to YTPlaylist" type="button" class="addto-button watch show-label yt-uix-tooltip-reverse yt-uix-button yt-uix-tooltip ytplaylist_addtolist" data-feature="watch" role="button" data-tooltip-text="Add to YTPlaylist"><img class="yt-uix-button-icon yt-uix-button-icon-addto" src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" alt="Add to YTPlaylist"><span class="yt-uix-button-content"><span class="addto-label">Add to YTPlaylist</span></span></button>';
+
+var ytplaylist_button_iframe = '<br/><button onclick=";return false;" class="ytplaylist_addtolist" style=""title="Add to YTPlaylist" type="button" data-feature="watch" role="button" data-tooltip-text="Add to YTPlaylist" style="padding: 0 .5em; height: 2.0833em; border: 1px solid #CCC; color: black; background: #F6F6F6; background-image: -moz-linear-gradient(top,#ffffff,#efefef); background-image: -webkit-gradient(linear,left top,left bottom,from(#ffffff),to(#efefef)); filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr=#ffffff,endColorStr=#efefef); -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px; white-space: nowrap; vertical-align: middle; cursor: pointer; overflow: visible;"><img style="background: no-repeat url(http://s.ytimg.com/yt/imgbin/www-refresh-vfl3IcHHw.png) -116px -61px;width: 8px;height: 9px;" src="http://s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" alt="Add to YTPlaylist"><span class="yt-uix-button-content"><span class="addto-label">Add to YTPlaylist</span></span></button>';
  
  
 function attach_addtolist_button(){
@@ -44,10 +47,9 @@ $(".video-list-item-link").each(function(){
 });
 
 //Add "Add to YTPlaylist" button on websites that have embedded Youtube videos
-$("iframe").each(function(){
-	alert($(this).contents().html());
-	//var vid_id = (($("link[rel='canonical']", this).attr("href")).split("="))[1];
-	//$(this).after(ytplaylist_button_watch + '<input type="hidden" id="ytplaylist_video_id" value="' + temp1 + '"/>');
+$('iframe[src*="youtube.com/embed/"]').each(function(){
+	var vid_id = (((($(this).attr('src')).split('?'))[0]).split("embed/"))[1];
+	$(this).after(ytplaylist_button_iframe + '<input type="hidden" id="ytplaylist_video_id" value="' + vid_id + '"/>');
 });
 
 //Add "Add to YTPlaylist" button on websites that have embedded Youtube videos
